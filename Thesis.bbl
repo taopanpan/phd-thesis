@@ -1,0 +1,40 @@
+\begin{thebibliography}{4}
+\bibpunct{[}{]}{,}{s}{,}{,}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI: #1}\else
+  \providecommand{\doi}{DOI: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{陶攀, 付忠良, 朱锴}(2017)]{tao2017}
+{陶攀, 付忠良, 朱锴} �.
+\newblock
+  基于深度学习的超声心动图切面识别方法\allowbreak[J/OL].
+\newblock 计算机应用, 2017, 37\penalty0 (5): 1434--1438.
+\newblock \url{http://www.joca.cn/CN/10.11772/j.issn.1001-9081.2017.05.1434}.
+\newblock \doi{10.11772/j.issn.1001-9081.2017.05.1434}.
+
+\bibitem[{陶攀, 付忠良}(2017)]{tao2017ha}
+{陶攀, 付忠良} �.
+\newblock 空间金字塔分解的深度可视化方法\allowbreak[J].
+\newblock 哈尔滨工业大学学报, 2017, 49\penalty0 (11): 8--13.
+\newblock \doi{10.11918/j.issn.0367-6254.201612087}.
+
+\bibitem[纪祥虎\ 等(2015)纪祥虎, 高斯聪, 陶攀, and
+  王莉莉]{tao2015}
+纪祥虎, 高斯聪, 陶攀, 等.
+\newblock
+  用于统计形状模型的特征点辅助标注方法\allowbreak[EB/OL].
+\newblock 中科院成都信息技术股份有限公司, 2015.
+\newblock \url{https://www.google.com/patents/CN105205827A?cl=zh}.
+
+\bibitem[Pan\ et~al.(2016)Pan, Zhongliang, Lili, and Kai]{Pan2016}
+PAN T, ZHONGLIANG F, LILI W, et~al.
+\newblock {Perceptual Loss with Fully Convolutional for Image Residual
+  Denoising}\allowbreak[M/OL]//\allowbreak{}TAN T, LI X, CHEN X, et~al.
+\newblock Pattern Recognition.
+\newblock Springer Singapore, 2016: 122--132.
+\newblock \url{http://link.springer.com/10.1007/978-981-10-3005-5{\_}11}.
+\newblock \doi{10.1007/978-981-10-3005-5_11}.
+
+\end{thebibliography}
