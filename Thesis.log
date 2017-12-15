@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/W32TeX) (preloaded format=xelatex 2016.7.28)  8 DEC 2017 16:40
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/W32TeX) (preloaded format=xelatex 2016.7.28)  13 DEC 2017 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1761,34 +1761,34 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ] [17]) [18] (./Tex/Main_Content.tex
 (./Tex/Chap01.tex
 第一章
-) (./Tex/Chap02.tex [1
+[1
 
 
-] [2
+] [2] [3] [4] [5] [6]) (./Tex/Chap02.tex [7] [8
 
 ]
 第二章
-) (./Tex/Chap03.tex [3] [4
+) (./Tex/Chap03.tex [9] [10
 
 ]
 第三章
-) (./Tex/Chap04.tex [5] [6
+) (./Tex/Chap04.tex [11] [12
 
 ]
 第四章
-) (./Tex/Chap05.tex [7] [8
+) (./Tex/Chap05.tex [13] [14
 
 ]
 第五章
-) (./Tex/Chap06.tex [9] [10
+) (./Tex/Chap06.tex [15] [16
 
 ]
 第六章
-) (./Tex/Chap07.tex [11] [12
+) (./Tex/Chap07.tex [17] [18
 
 ]
 第七章
-)) [13] [14
+)) [19] [20
 
 ] (./Thesis.bbl
 Invalid UTF-8 byte or sequence at line 10 replaced by U+FFFD.
@@ -1835,10 +1835,10 @@ Package microtype Info: Loading generic settings for font family
 Invalid UTF-8 byte or sequence at line 18 replaced by U+FFFD.
 Missing character: There is no � in font [lmroman10-regular]:mapping=tex-text!
 ) (./Tex/Backmatter.tex
-[15
+[21
 
 
-] [16
+] [22
 
 ]
 Overfull \hbox (30.42pt too wide) in paragraph at lines 10--11
@@ -1846,7 +1846,7 @@ Overfull \hbox (30.42pt too wide) in paragraph at lines 10--11
 /it/12 Pattern Recognition\EU1/lmr/m/n/12 ,\EU1/lmr/bx/n/12 CCPR(EI)
  []
 
-[17] [18] [19] [20
+[23] [24] [25] [26
 
 ]
 
@@ -1856,7 +1856,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 102.
- [21]
+ [27]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 102.
  (./Thesis.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 102.
@@ -1864,12 +1864,12 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 102.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 102.
  ) 
 Here is how much of TeX's memory you used:
- 30880 strings out of 493589
- 591906 string characters out of 6146760
- 600410 words of memory out of 5000000
- 33881 multiletter control sequences out of 15000+600000
+ 30932 strings out of 493589
+ 595048 string characters out of 6146760
+ 617565 words of memory out of 5000000
+ 33933 multiletter control sequences out of 15000+600000
  18042 words of font info for 108 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
  69i,12n,80p,10510b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Thesis.pdf (39 pages).
+Output written on Thesis.pdf (45 pages).
