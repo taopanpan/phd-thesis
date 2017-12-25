@@ -1029,8 +1029,6 @@ FUNCTION {monograph}
   format.year "year" output.check
   format.pages punct.colon output.after
   format.urldate "" output.after
-  format.url output
-  format.doi output
   fin.entry
 }
 
@@ -1055,8 +1053,6 @@ FUNCTION {incollection}
   format.year "year" output.check
   format.pages punct.colon output.after
   format.urldate "" output.after
-  format.url output
-  format.doi output
   fin.entry
 }
 
@@ -1074,8 +1070,6 @@ FUNCTION {periodical}
   format.address.publisher output
   format.date "year" output.check
   format.urldate "" output.after
-  format.url output
-  format.doi output
   fin.entry
 }
 
@@ -1094,8 +1088,6 @@ FUNCTION {article.in.journal}
   format.journal.number "" output.after
   format.pages punct.colon output.after
   format.urldate "" output.after
-  format.url output
-  format.doi output
   fin.entry
 }
 
@@ -1115,8 +1107,6 @@ FUNCTION {patent}
   new.block
   format.date "year" output.check
   format.urldate "" output.after
-  format.url output
-  format.doi output
   fin.entry
 }
 
@@ -1137,8 +1127,6 @@ FUNCTION {online}
   format.pages punct.colon output.after
   format.editdate "" output.after
   format.urldate "" output.after
-  format.url output
-  format.doi output
   fin.entry
 }
 
