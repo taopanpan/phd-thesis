@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.12.16)  25 DEC 2017 20:53
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.12.16)  25 DEC 2017 23:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1777,4 +1777,158 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyper
+(hyperref)                \hskip 12.0pt
+(hyperref)                replaced by space on input line 57.
+
+(Tmp/Thesis.toc [11
+
+])
+\tf@toc=\write4
+\openout4 = `Thesis.toc'.
+
+ [12] (Tmp/Thesis.lof)
+\tf@lof=\write5
+\openout5 = `Thesis.lof'.
+
+ [13
+
+
+] [14
+
+] (Tmp/Thesis.lot)
+\tf@lot=\write6
+\openout6 = `Thesis.lot'.
+
+
+(./Tex/Prematter.tex [15
+
+] [16
+
+] [17]) [18] (./Tex/Main_Content.tex
+(./Tex/Chap01.tex
+第一章
+[1
+
+
+] [2] [3] [4] [5]) (./Tex/Chap02.tex [6]
+第二章
+[7
+
+]) (./Tex/Chap03.tex [8]
+第三章
+[9
+
+]
+File: ch03_02.pdf Graphic file (type QTm)
+ <use  "ch03_02.pdf" > [10] [11] [12]
+File: ch03_03.png Graphic file (type QTm)
+ <use  "ch03_03.png" > [13]
+File: ch03_04.png Graphic file (type QTm)
+
+<use  "ch03_04.png" > [14]
+File: ch03_05.png Graphic file (type QTm)
+ <use  "ch03_05.png" >
+File: ch03_06.pdf Graphic file (type QTm)
+ <use  "ch03_06.pdf" > [15])
+(./Tex/Chap04.tex [16]
+第四章
+[17
+
+] [18] [19]
+File: ch04_01.png Graphic file (type QTm)
+ <use  "ch04_01.png" > [20] [21]
+File: ch04_02.png Graphic file (type QTm)
+ <use  "ch04_02.png" > [22]
+File: ch04_03.png Graphic file (type QTm)
+
+<use  "ch04_03.png" >
+
+Package natbib Warning: Citation `•' on page 23 undefined on input line 154.
+
+[23]
+File: ch04_04.png Graphic file (type QTm)
+ <use  "ch04_04.png" >
+File: ch04_05.png Graphic file (type QTm)
+ <use  "ch04_05.png" > [24]) (./Tex/Chap05.tex
+[25] [26]
+第五章
+[27
+
+]
+Missing character: There is no ∈ in font [lmroman12-regular]:mapping=tex-text;!
+Missing character: There is no ≥ in font [lmroman12-regular]:mapping=tex-text;!
+Missing character: There is no ≥ in font [lmroman12-regular]:mapping=tex-text;!
+Missing character: There is no ≥ in font [lmroman12-regular]:mapping=tex-text;!
+Missing character: There is no ∪ in font [lmroman12-regular]:mapping=tex-text;!
+ [28]
+
+Package natbib Warning: Citation `He2015spp' on page 29 undefined on input line
+ 41.
+
+[29]
+Missing character: There is no θ in font [lmroman12-regular]:mapping=tex-text;!
+Missing character: There is no θ in font [lmroman12-regular]:mapping=tex-text;!
+Missing character: There is no α in font [lmroman12-regular]:mapping=tex-text;!
+ [30] [31]
+Overfull \hbox (134.43729pt too wide) in paragraph at lines 94--98
+\TU/SimSun(0)/m/n/12 图 数 据 集  |（不 包 含 患 者 信 息）|  上 进 行 实 验。|  相 关 实 验 代 码 请 参 考
+ \TU/lmr/m/n/12 https://github.com/taopanpan/echodetection\TU/SimSun(0)/m/n/12 
+。|
+ []
+
+[32] [33]) (./Tex/Chap06.tex [34]
+第六章
+) (./Tex/Chap07.tex [35
+
+] [36
+
+]
+第七章
+)) [37] [38
+
+] (Tmp/Thesis.bbl [39
+
+
+] [40] [41] [42]) (./Tex/Backmatter.tex
+[43] [44
+
+]
+Overfull \hbox (31.0453pt too wide) in paragraph at lines 11--12
+\TU/lmr/m/n/12 Shapes for Constructing Point Distribution Model.[], \TU/lmr/m/i
+t/12 Pattern Recognition\TU/lmr/m/n/12 ,\TU/lmr/bx/n/12 CCPR(EI)
+ []
+
+[45] [46] [47] [48
+
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \hskip 12.0pt
+(hyperref)                replaced by space on input line 57.
+
+)
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 102.
+[49]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 102.
+ (Tmp/Thesis.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 102.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 102.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 102.
+ ) 
+Here is how much of TeX's memory you used:
+ 30766 strings out of 493005
+ 593366 string characters out of 6137955
+ 663301 words of memory out of 5000000
+ 34324 multiletter control sequences out of 15000+600000
+ 19754 words of font info for 118 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 63i,15n,71p,10510b,657s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on Tmp/Thesis.pdf (67 pages).

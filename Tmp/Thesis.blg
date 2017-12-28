@@ -2,59 +2,65 @@ This is BibTeX, Version 0.99d (TeX Live 2017/W32TeX)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: ./Tmp/Thesis.aux
 The style file: Biblio/gbt-7714-2015-numerical.bst
+Case mismatch error between cite keys He2015spp and he2015spp
+---line 229 of file ./Tmp/Thesis.aux
+ : \citation{He2015spp
+ :                    }
+I'm skipping whatever remains of this command
 Database file #1: Biblio/ref.bib
 You're missing a field name---line 43 of file Biblio/ref.bib
  : 
  : %url = {http://link.springer.com/10.1007/978-981-10-3005-5{\_}11},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-"}" immediately follows a field name---line 641 of file Biblio/ref.bib
+"}" immediately follows a field name---line 712 of file Biblio/ref.bib
  : information.pdf:pdf
  :                    },
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "•"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty title in VanderSchaaf1996a
 Warning--empty year in VanderSchaaf1996a
 Warning--empty year in VanderSchaaf1996a
-You've used 40 entries,
+You've used 60 entries,
             3276 wiz_defined-function locations,
-            1108 strings with 17498 characters,
-and the built_in function-call counts, 130962 in all, are:
-= -- 2322
-> -- 17767
-< -- 11759
-+ -- 6376
-- -- 370
-* -- 1644
-:= -- 14992
-add.period$ -- 121
-call.type$ -- 40
-change.case$ -- 195
-chr.to.int$ -- 5643
-cite$ -- 43
-duplicate$ -- 11987
-empty$ -- 2049
-format.name$ -- 440
-if$ -- 28323
-int.to.chr$ -- 2
-int.to.str$ -- 41
+            1297 strings with 23509 characters,
+and the built_in function-call counts, 194602 in all, are:
+= -- 3437
+> -- 26382
+< -- 17504
++ -- 9483
+- -- 533
+* -- 2421
+:= -- 22283
+add.period$ -- 181
+call.type$ -- 60
+change.case$ -- 285
+chr.to.int$ -- 8399
+cite$ -- 63
+duplicate$ -- 17834
+empty$ -- 3018
+format.name$ -- 631
+if$ -- 42043
+int.to.chr$ -- 3
+int.to.str$ -- 61
 missing$ -- 0
-newline$ -- 210
-num.names$ -- 122
-pop$ -- 5877
+newline$ -- 310
+num.names$ -- 182
+pop$ -- 8728
 preamble$ -- 1
-purify$ -- 40
+purify$ -- 60
 quote$ -- 0
-skip$ -- 12246
+skip$ -- 18211
 stack$ -- 0
-substring$ -- 6970
-swap$ -- 46
-text.length$ -- 127
+substring$ -- 10425
+swap$ -- 69
+text.length$ -- 191
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 338
+type$ -- 496
 warning$ -- 3
-while$ -- 276
+while$ -- 417
 width$ -- 0
-write$ -- 592
-(There were 2 error messages)
+write$ -- 888
+(There were 3 error messages)
