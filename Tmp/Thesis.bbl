@@ -1,4 +1,4 @@
-\begin{thebibliography}{60}
+\begin{thebibliography}{62}
 \bibpunct{[}{]}{,}{s}{,}{,}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -427,5 +427,18 @@ REN S, HE K, GIRSHICK R, et~al.
   Proposal Networks}\allowbreak[C/OL]//\allowbreak{}Adv. Neural Inf. Process.
   Syst.
 \newblock 2015: 1--10.
+
+\bibitem[Jaderberg\ et~al.(2015)Jaderberg, Simonyan, Zisserman, and
+  Kavukcuoglu]{Jaderberg2015}
+JADERBERG M, SIMONYAN K, ZISSERMAN A, et~al.
+\newblock {Spatial Transformer Networks}\allowbreak[C/OL]//\allowbreak{}Proc.
+  28th Int. Conf. Neural Inf. Process. Syst.: volume~25.
+\newblock Montreal, Canada, 2015: 2017--2025.
+
+\bibitem[Beyer\ et~al.(2015)Beyer, Hermans, and Leibe]{Beyer2015}
+BEYER L, HERMANS A, LEIBE B.
+\newblock {Biternion nets: Continuous head pose regression from discrete
+  training labels}\allowbreak[J].
+\newblock Lect. Notes Comput. Sci., 2015, 9358: 157--168.
 
 \end{thebibliography}

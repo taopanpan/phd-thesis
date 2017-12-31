@@ -3,7 +3,7 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: ./Tmp/Thesis.aux
 The style file: Biblio/gbt-7714-2015-numerical.bst
 Case mismatch error between cite keys He2015spp and he2015spp
----line 229 of file ./Tmp/Thesis.aux
+---line 231 of file ./Tmp/Thesis.aux
  : \citation{He2015spp
  :                    }
 I'm skipping whatever remains of this command
@@ -17,50 +17,58 @@ I'm skipping whatever remains of this entry
  : information.pdf:pdf
  :                    },
 I'm skipping whatever remains of this entry
+Repeated entry---line 1092 of file Biblio/ref.bib
+ : @inproceedings{Jaderberg2015
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1108 of file Biblio/ref.bib
+ : @article{Beyer2015
+ :                   ,
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "•"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty title in VanderSchaaf1996a
 Warning--empty year in VanderSchaaf1996a
 Warning--empty year in VanderSchaaf1996a
-You've used 60 entries,
+You've used 62 entries,
             3276 wiz_defined-function locations,
-            1297 strings with 23509 characters,
-and the built_in function-call counts, 194602 in all, are:
-= -- 3437
-> -- 26382
-< -- 17504
-+ -- 9483
-- -- 533
-* -- 2421
-:= -- 22283
-add.period$ -- 181
-call.type$ -- 60
-change.case$ -- 285
-chr.to.int$ -- 8399
-cite$ -- 63
-duplicate$ -- 17834
-empty$ -- 3018
-format.name$ -- 631
-if$ -- 42043
+            1315 strings with 23979 characters,
+and the built_in function-call counts, 200422 in all, are:
+= -- 3556
+> -- 27148
+< -- 18013
++ -- 9760
+- -- 552
+* -- 2508
+:= -- 22953
+add.period$ -- 187
+call.type$ -- 62
+change.case$ -- 295
+chr.to.int$ -- 8645
+cite$ -- 65
+duplicate$ -- 18355
+empty$ -- 3122
+format.name$ -- 652
+if$ -- 43303
 int.to.chr$ -- 3
-int.to.str$ -- 61
+int.to.str$ -- 63
 missing$ -- 0
-newline$ -- 310
-num.names$ -- 182
-pop$ -- 8728
+newline$ -- 320
+num.names$ -- 188
+pop$ -- 8980
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 62
 quote$ -- 0
-skip$ -- 18211
+skip$ -- 18743
 stack$ -- 0
-substring$ -- 10425
-swap$ -- 69
-text.length$ -- 191
+substring$ -- 10750
+swap$ -- 72
+text.length$ -- 199
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 496
+type$ -- 512
 warning$ -- 3
-while$ -- 417
+while$ -- 432
 width$ -- 0
-write$ -- 888
-(There were 3 error messages)
+write$ -- 918
+(There were 5 error messages)

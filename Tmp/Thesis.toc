@@ -35,7 +35,7 @@
 \contentsline {section}{\numberline {3.4}本章小结}{16}{section.3.4}
 \contentsline {chapter}{\numberline {第四章\hspace {.3em}}空间金字塔分解的深度可视化方法}{17}{chapter.4}
 \contentsline {section}{\numberline {4.1}引言}{17}{section.4.1}
-\contentsline {section}{\numberline {4.2} 可视化方法的数学模型}{18}{section.4.2}
+\contentsline {section}{\numberline {4.2}可视化方法的数学模型}{18}{section.4.2}
 \contentsline {section}{\numberline {4.3}梯度更新的可视化方法}{19}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}$p$ 范数正则化方法}{19}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}高斯模糊和TV变分}{19}{subsection.4.3.2}
@@ -54,24 +54,26 @@
 \contentsline {chapter}{\numberline {第五章\hspace {.3em}}医学计算机辅助检测方法}{27}{chapter.5}
 \contentsline {section}{\numberline {5.1}引言}{27}{section.5.1}
 \contentsline {section}{\numberline {5.2}区域卷积神经网络概览}{28}{section.5.2}
-\contentsline {section}{\numberline {5.3}候选区域生成网络及其改进}{29}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}候选区域生成网络模型结构}{29}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}仿射变换候选框}{30}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}朝向回归损失函数}{31}{subsection.5.3.3}
-\contentsline {subsection}{\numberline {5.3.4}带朝向的多任务损失函数}{31}{subsection.5.3.4}
-\contentsline {subsection}{\numberline {5.3.5}困难样例挖掘}{31}{subsection.5.3.5}
-\contentsline {section}{\numberline {5.4}实验结果分析和讨论}{32}{section.5.4}
-\contentsline {section}{\numberline {5.5}本章小结}{34}{section.5.5}
-\contentsline {chapter}{\numberline {第六章\hspace {.3em}}医学图像的分割方法}{35}{chapter.6}
-\contentsline {section}{\numberline {6.1}引言}{35}{section.6.1}
-\contentsline {section}{\numberline {6.2}初始位置定位和特征点标注}{35}{section.6.2}
-\contentsline {section}{\numberline {6.3}AAM模型和CLM模型}{35}{section.6.3}
-\contentsline {section}{\numberline {6.4}结合卷积网络特征的形状对齐模型}{35}{section.6.4}
-\contentsline {subsection}{\numberline {6.4.1}超声组织特征纹理特异性灰度归一化}{35}{subsection.6.4.1}
-\contentsline {subsection}{\numberline {6.4.2}结合不同外观特征的全局AAM}{35}{subsection.6.4.2}
-\contentsline {section}{\numberline {6.5}实验结果分析和讨论}{35}{section.6.5}
-\contentsline {section}{\numberline {6.6}本章小结}{35}{section.6.6}
-\contentsline {chapter}{\numberline {第七章\hspace {.3em}}总结与展望}{37}{chapter.7}
-\contentsline {chapter}{参考文献}{39}{section*.24}
-\contentsline {chapter}{攻读学位期间发表的学术论文与科研成果}{45}{chapter*.26}
-\contentsline {chapter}{致\hskip 1em\relax 谢}{49}{chapter*.33}
+\contentsline {subsection}{\numberline {5.2.1}物体检测形式化定义}{28}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}区域卷积神经网络的演进}{29}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}候选区域生成网络及其改进}{30}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}候选区域生成网络模型结构}{30}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}仿射变换候选框}{31}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}朝向回归损失函数}{32}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}带朝向的多任务损失函数}{33}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}困难样例挖掘}{33}{subsection.5.3.5}
+\contentsline {section}{\numberline {5.4}实验结果分析和讨论}{34}{section.5.4}
+\contentsline {section}{\numberline {5.5}本章小结}{36}{section.5.5}
+\contentsline {chapter}{\numberline {第六章\hspace {.3em}}医学图像的分割方法}{37}{chapter.6}
+\contentsline {section}{\numberline {6.1}引言}{37}{section.6.1}
+\contentsline {section}{\numberline {6.2}初始位置定位和特征点标注}{37}{section.6.2}
+\contentsline {section}{\numberline {6.3}AAM模型和CLM模型}{37}{section.6.3}
+\contentsline {section}{\numberline {6.4}结合卷积网络特征的形状对齐模型}{37}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}超声组织特征纹理特异性灰度归一化}{37}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}结合不同外观特征的全局AAM}{37}{subsection.6.4.2}
+\contentsline {section}{\numberline {6.5}实验结果分析和讨论}{37}{section.6.5}
+\contentsline {section}{\numberline {6.6}本章小结}{37}{section.6.6}
+\contentsline {chapter}{\numberline {第七章\hspace {.3em}}总结与展望}{39}{chapter.7}
+\contentsline {chapter}{参考文献}{41}{section*.27}
+\contentsline {chapter}{攻读学位期间发表的学术论文与科研成果}{47}{chapter*.29}
+\contentsline {chapter}{致\hskip 1em\relax 谢}{51}{chapter*.36}

@@ -22,21 +22,23 @@
 若用$r$来表示图像中的矩形窗口区域，令$R$表示由对象检测系统提供的所有候选窗口的集合，将有效定位标记定义为$R$的子集，使得标记位置内内容“不重叠”，令$Y$来表示所有有效标记位置的集合。并合并常用的非最大值抑制（Non-maximum suppression, NMS）过程，给定图像$x$和窗口评分函数$f$，物体检测算法流程可定义为:
 \begin{table}[htbp]
  \caption{\label{tab:Algorithm1}算法 1 物体检测}
+ \begin{center}
  \begin{tabular}{l}
   \toprule
   Input: 图像x，窗口得分函数f  \\
   \midrule
-  1:  $D$:= 所有候选框 $r \in 使得$f(x, r) > 0$ \\
-  2:  按 $f$ 排序$D$使得 $D1 ≥ D2 ≥ D3 ≥ ...Dn$ \\
-  3:  $y^∗$:$= {}$  \\
+  1:  $D$:= 所有候选框 $r \in$ 使得$f(x, r) > 0$ \\
+  2:  按 $f$ 排序$D$使得 $D1\geq D2 \geq D3 \geq ...Dn$ \\
+  3:  $y^∗$:$=$ {}   \\
   4:  for $i = 1$ to $n$ do \\
-  5:     若 $D_{i} 和 $y^∗$中任意候选框不重叠 \\
+  5:     若 $D_{i}$ 和 $y^∗$中任意候选框不重叠 \\
   6:          $y^∗$ := $y^∗  \bigcup {D_{i}}$ \\
-  7:  end for\\
+  7:  end for \\
   \midrule
-  8:  Return:  $y^∗$，物体的目标位置.
-  \bottomrule
+  8:  Return:  $y^∗$，物体的目标位置. \\
+  \bottomrule 
  \end{tabular}
+  \end{center}
 \end{table} 
  
 形式化定义物体检测过程见公式\ref{eq:ch05_01}，式中参数定义请参考算法\ref{tab:Algorithm1}。
@@ -52,6 +54,7 @@
 \section{候选区域生成网络及其改进}
  
 本章将分别从候选区域生成网络模型的结构、仿射变换候选框区域的生成、空间变换损失函数的设计、模型训练方法等方面介绍本文所提出框架，并结合Faster RCNN模型提出端到端的目标检测方法。
+
 \subsection{候选区域生成网络模型结构}
 
 候选区域生成网络将一图像（任意大小）作为输入，输出目标候选框的集合和每个候选框内有无目标的概率估计，如图\ref{fig:ch05_01}右图所示，RPN在卷积层后接两个全卷积层完成候选区域生成功能，以实现增加滑动窗口操作。该模型使用全卷积网络[20]处理任意大小的图片输入，为了和目标检测网络\citep{Girshick2015b}共享计算，在特征提取的过程中同时计算目标检测所需的感兴趣区域的初始估计，在最后一个共享卷积层输出的特征映射图上滑动小网络，卷积特征映射图上n×n大小空间窗口作为该网络全连接的输入，本文n取3。每个滑动窗口映射到一个低维向量上（如图一左上中256-d），该向量输出给两个全连接层——候选框位置定位回归层和候选框类别分类层。原文中采用类别无关分类损失，即仅区分该候选框内是否包含物体（前/背景），本文将其扩展为类别相关的分类损失。
@@ -60,7 +63,7 @@
 %trim option's parameter order: left bottom right top
 %\includegraphics[trim = 30mm 0mm 30mm 0mm, clip, width=0.45\textwidth]{ch03_02}
 \includegraphics[width=0.85\textwidth]{ch05_01}
-\caption{左上：引入空间不变性的anchor机制  左下：空间变换网络  右：Faster R-CNN带仿射变换的检测模型框架}
+\caption{左上：引入空间不变性的anchor机制\   左下：空间变换网络  右：Faster R-CNN带仿射变换的检测模型框架}
 \label{fig:ch05_01}
 \end{figure}
 
@@ -69,7 +72,7 @@
 \centering
 %trim option's parameter order: left bottom right top
 %\includegraphics[trim = 30mm 0mm 30mm 0mm, clip, width=0.45\textwidth]{ch03_02}
-\includegraphics[width=0.85\textwidth]{ch05_02}
+\includegraphics[trim = 0mm 30mm  0mm 30mm,height=0.3\textheight]{ch05_02}
 \caption{考虑物体朝向的区域生成网络模型结构示意图，图中conv表示卷积层，pool表示池化层，右侧的带仿射变换的区域生成网络模型同最终的检测模型一致，其中的FC表示全连接层，softmax class loss表示多任务损失中的分类损失，Bbox.reg loss 表示候选框回归定位损失，Rotation loss 表示文中的针对变换参数θ的 Von Mise损失。}
 \label{fig:ch05_02}
 \end{figure} 
@@ -78,30 +81,82 @@
  
 为检测物体的姿态，结合空间变换网络\citep{Jaderberg2015}（见图\ref{fig:ch05_01}左下），提出带仿射变换的候选框生成算法。之前的候选框生成方法仅考虑固定尺度和宽高比的矩形框，并未考虑物体的旋转朝向，二维空间仿射变换可表示为:
 \begin{equation} \label{eq:ch05_02}
-      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
-\end{equation}                    	(2)
-式中 为输入特征图中目标坐标系下的网格点， 为变换矩阵， 输出特征图中目标坐标系下的采样网格点。其中由于图像的坐标不是中心坐标系，宽高坐标需归一化表示，如 ，且采用图形学中齐次坐标表示。公式（2）能用六个参数定义对输入特征图的裁剪、平移、旋转和缩放等变换。该公式进步简化为只考虑旋转变换：
-      	                    	(3)
-其中 α表示绕图像中心顺时针旋转角度，通常变换后的像素并不是在相应网格的整数值，常用双线性插值进行近似，变换后的候选框送入感兴趣区域池化层，后接多任务损失函数。实质是把空间变换层嵌入到RPN网络中，并且引入有监督的损失以指导空间变换。
+\begin{pmatrix}
+x_{i}^{s}\\ 
+y_{i}^{s}
+\end{pmatrix} =\tau _{\theta}\begin{pmatrix}
+x_{i}^{t}\\ 
+y_{i}^{t}\\
+1
+\end{pmatrix}=\begin{bmatrix}
+\theta_{11} &\theta_{12}  &\theta_{13} \\ 
+ \theta_{11}&\theta_{22}  & \theta_{23}
+\end{bmatrix}\begin{pmatrix}
+x_{i}^{t}\\ 
+y_{i}^{t}\\
+1
+\end{pmatrix}
+\end{equation}                    
+式中$(x_{i}^{s},y_{i}^{s})^T $为输入特征图中目标坐标系下的网格点，$\tau _{\theta}$ 为变换矩阵， $(x_{i}^{t},y_{i}^{t})^T $为输出特征图中目标坐标系下的采样网格点。其中由于图像的坐标不是中心坐标系，宽高坐标需归一化表示，如$-1\leq x_{i}^{s},y_{i}^{s}\geq 1$ ，且采用图形学中齐次坐标表示。公式\ref{eq:ch05_02}能用六个参数定义对输入特征图的裁剪、平移、旋转和缩放等变换。该公式进步简化为只考虑旋转变换：
+\begin{equation} \label{eq:ch05_03}
+\begin{pmatrix}
+x_{i}^{s}\\ 
+y_{i}^{s}
+\end{pmatrix} =\tau _{\theta}\begin{pmatrix}
+x_{i}^{t}\\ 
+y_{i}^{t}\\
+1
+\end{pmatrix}=\begin{bmatrix}
+\cos\alpha &-\sin\alpha  &0 \\ 
+ \sin\alpha&\cos\alpha  & 0
+\end{bmatrix}\begin{pmatrix}
+x_{i}^{t}\\ 
+y_{i}^{t}\\
+1
+\end{pmatrix}
+\end{equation}  
+其中 $\alpha$表示绕图像中心顺时针旋转角度，通常变换后的像素并不是在相应网格的整数值，常用双线性插值进行近似，变换后的候选框送入感兴趣区域池化层，后接多任务损失函数。实质是把空间变换层嵌入到RPN网络中，并且引入有监督的损失以指导空间变换。
 \subsection{朝向回归损失函数}
-旋转朝向的周期性会导致两个问题：（1）要优化的损失函数不能区分对于周期性损失，简单地将模运算符应用于网络的输出会导致不可靠的损失，不能再被鲁棒地优化。（2）由大多数参数模型中执行的矩阵向量积产生的回归输出是固定的线性运算。为此提出旋转朝向回归损失 ，第一个问题可以通过采用Von Mise 分布[22]来解决损失函数不连续性，其近似服从于单位圆上的正态分布：
-	                            	  					             (4)
-其中p指相应的概率密度函数， 指角度， 是分布的平均角度， 与近似高斯方差成反比，而  是阶数为0的修正贝塞尔函数，利用余弦函数来避免不连续性，可以得出以下损失函数：
-         			                    (5)
-式中 为预测旋转角度大小，t为真实旋转角度大小，称t为目标值，k为控制损失函数尾部的简单超参数。由角度 正余弦组成的二维向量 替代表示，利用自然语言处理文献中广泛使用的余弦代价函数[31]来解决使用线性操作来预测周期值的问题：
-     					                   (6)
+
+旋转朝向的周期性会导致两个问题：（1）要优化的损失函数不能区分对于周期性损失，简单地将模运算符应用于网络的输出会导致不可靠的损失，不能再被鲁棒地优化。（2）由大多数参数模型中执行的矩阵向量积产生的回归输出是固定的线性运算。为此提出旋转朝向回归损失$L_{VM}(o,o^{*})$ ，第一个问题可以通过采用Von Mise 分布\citep{Beyer2015}来解决损失函数不连续性，其近似服从于单位圆上的正态分布：
+\begin{equation} \label{eq:ch05_04}
+      p_{VM}(\varphi \mid \mu,k)=\frac{e^{k \cos(\varphi-\mu)}}{2\pi I_{0}(k)}
+\end{equation} 	                            	  					             
+其中$p$指相应的概率密度函数，$\varphi$ 指角度，$\mu $ 是分布的平均角度，$k$ 与近似高斯方差成反比，而$I_{0}(k)$  是阶数为0的修正贝塞尔函数，利用余弦函数来避免不连续性，可以得出以下损失函数：
+ \begin{equation} \label{eq:ch05_05}
+      C_{VM}(\theta \mid t,k)= 1- e^{k (\cos(\theta-t)-1)}
+\end{equation}         			                    
+式中$\theta$ 为预测旋转角度大小，$t$为真实旋转角度大小，称$t$为目标值，$k$为控制损失函数尾部的简单超参数。由角度$varphi$ 正余弦组成的二维向量$y=(\cos\varphi,\sin\varphi)$ 替代表示，利用自然语言处理文献中广泛使用的余弦代价函数[31]来解决使用线性操作来预测周期值的问题：
+\begin{equation} \label{eq:ch05_06}
+     C_{\cos}(y \mid t)=1- \frac{y\times t}{\parallel y\parallel \parallel t\parallel}  
+\end{equation}      					               
 在神经网络框架中的实现是相对简单的，因为所需要的是全连接层和归一化层，前向传播公式：
-                      			                    	(7)
-式中  和  是来自全连接层的可学习参数，然后反向传播归一化损失的导数为
-	                 			     (8)
-式中归一化确保输出值被联合学习，通过比较CVM和Ccos，最终朝向回归损失函数为
-	                           									 (9)  
+\begin{equation} \label{eq:ch05_07}
+      f_{BT}(x \mid W,b)=\frac{Wx+b}{\parallel Wx+b \parallel }
+\end{equation}                       			                    	 
+式中 $W\in R^{n\times 2}$ 和 $b\in R^{2}$ 是来自全连接层的可学习参数，然后反向传播归一化损失的导数为
+\begin{equation} \label{eq:ch05_08}
+      \partial _{x_{i}} \frac{x}{\parallel x\parallel}=\partial _{x_{i}}\frac{x }{\sqrt{\sum_{j}x_j^2}} =\frac{\sum_{j \neq 
+ i}x_j^2 }{(\sum_{j}x_j^2)^{\frac{3}{2}}}  =\frac{\sum_{j \neq i}x_j^2 }{\parallel x\parallel^3} 
+\end{equation} 	                 			    
+式中归一化确保输出值被联合学习，通过比较$CVM$和$Ccos$，最终朝向回归损失函数为
+\begin{equation} \label{eq:ch05_09}
+      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
+\end{equation} 	                           								
 与式6相似，主要区别在于存在e，它将目标值附近的错误“下推”，实际上是较小地惩罚小错误。
+
 \subsection{带朝向的多任务损失函数}
+
 多任务损失分别存在于RPN及检测网络中，图2中显示的是检测网络结构示意图。每一个候选框均送感兴趣池化层，后接两层的全连接层和多元逻辑回归分类损失（图2中Softmax loss），候选区域回归定位损失（图2中Box.reg loss）和旋转朝向回归损失（图2中Rotation loss）：式中，分别代表预测类别分类概率，候选框偏移量和感兴趣区域内物体的朝向大小； 表示标记类别为背景， 表示框内是否有目标的指示函数， 分别表示物体的候选框标记和真实朝向。 为两个损失的相应平衡权重大小，详细形式如下：
-   	       								      (11)
-  									(12)
- 								 	(13)
+\begin{equation} \label{eq:ch05_11}
+      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
+\end{equation} 	       								      (11)
+ \begin{equation} \label{eq:ch05_12}
+      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
+\end{equation}  									(12)
+ \begin{equation} \label{eq:ch05_13}
+      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
+\end{equation} 								 	(13)
  和 是公式4中的分类损失和相应的平滑L1损失，c代表类别数。
 \subsection{困难样例挖掘}
 由于医学数据样本标注困难，数量相对较少，一般假设与目标位置矩形框有重叠的候选框是有较大概率是难以区分的，结果也可能是次优的，因为在其他位置可能存在更难区分的样本，导致模型收敛变慢，误警率高。在每次迭代训练过程中采用在线困难样例挖掘方法（Online Hard Example Mining，OHEM）[23]，对所有候选框的损失进行排序，由于相似候选框重叠区域的损失很接近，可采用非极大值抑制策略限制候选框的数目，选择前k个最大损失作为困难样例，反向传播其相应的梯度，其他候选框的梯度不进行回传，即不更新模型权重。 
