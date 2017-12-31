@@ -72,7 +72,7 @@
 \centering
 %trim option's parameter order: left bottom right top
 %\includegraphics[trim = 30mm 0mm 30mm 0mm, clip, width=0.45\textwidth]{ch03_02}
-\includegraphics[trim = 0mm 30mm  0mm 30mm,height=0.3\textheight]{ch05_02}
+\includegraphics[trim = 0mm 80mm  0mm 80mm,width=0.95\textwidth]{ch05_02}
 \caption{考虑物体朝向的区域生成网络模型结构示意图，图中conv表示卷积层，pool表示池化层，右侧的带仿射变换的区域生成网络模型同最终的检测模型一致，其中的FC表示全连接层，softmax class loss表示多任务损失中的分类损失，Bbox.reg loss 表示候选框回归定位损失，Rotation loss 表示文中的针对变换参数θ的 Von Mise损失。}
 \label{fig:ch05_02}
 \end{figure} 
@@ -133,7 +133,8 @@ y_{i}^{t}\\
 在神经网络框架中的实现是相对简单的，因为所需要的是全连接层和归一化层，前向传播公式：
 \begin{equation} \label{eq:ch05_07}
       f_{BT}(x \mid W,b)=\frac{Wx+b}{\parallel Wx+b \parallel }
-\end{equation}                       			                    	 
+\end{equation}  
+                     			                    	 
 式中 $W\in R^{n\times 2}$ 和 $b\in R^{2}$ 是来自全连接层的可学习参数，然后反向传播归一化损失的导数为
 \begin{equation} \label{eq:ch05_08}
       \partial _{x_{i}} \frac{x}{\parallel x\parallel}=\partial _{x_{i}}\frac{x }{\sqrt{\sum_{j}x_j^2}} =\frac{\sum_{j \neq 
@@ -141,64 +142,141 @@ y_{i}^{t}\\
 \end{equation} 	                 			    
 式中归一化确保输出值被联合学习，通过比较$CVM$和$Ccos$，最终朝向回归损失函数为
 \begin{equation} \label{eq:ch05_09}
-      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
+      L_{VM}(y\mid t) = 1- e^{k (y\times t-1)}
 \end{equation} 	                           								
-与式6相似，主要区别在于存在e，它将目标值附近的错误“下推”，实际上是较小地惩罚小错误。
+与式\ref{eq:ch05_06}相似，主要区别在于存在e，它将目标值附近的错误“下推”，实际上是较小地惩罚小错误。
 
 \subsection{带朝向的多任务损失函数}
 
-多任务损失分别存在于RPN及检测网络中，图2中显示的是检测网络结构示意图。每一个候选框均送感兴趣池化层，后接两层的全连接层和多元逻辑回归分类损失（图2中Softmax loss），候选区域回归定位损失（图2中Box.reg loss）和旋转朝向回归损失（图2中Rotation loss）：式中，分别代表预测类别分类概率，候选框偏移量和感兴趣区域内物体的朝向大小； 表示标记类别为背景， 表示框内是否有目标的指示函数， 分别表示物体的候选框标记和真实朝向。 为两个损失的相应平衡权重大小，详细形式如下：
-\begin{equation} \label{eq:ch05_11}
-      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
-\end{equation} 	       								      (11)
- \begin{equation} \label{eq:ch05_12}
-      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
-\end{equation}  									(12)
- \begin{equation} \label{eq:ch05_13}
-      y^∗=\mathop{\arg\min}_{y\in Y}\sum _{r\in Y} f(x,r)
-\end{equation} 								 	(13)
- 和 是公式4中的分类损失和相应的平滑L1损失，c代表类别数。
-\subsection{困难样例挖掘}
-由于医学数据样本标注困难，数量相对较少，一般假设与目标位置矩形框有重叠的候选框是有较大概率是难以区分的，结果也可能是次优的，因为在其他位置可能存在更难区分的样本，导致模型收敛变慢，误警率高。在每次迭代训练过程中采用在线困难样例挖掘方法（Online Hard Example Mining，OHEM）[23]，对所有候选框的损失进行排序，由于相似候选框重叠区域的损失很接近，可采用非极大值抑制策略限制候选框的数目，选择前k个最大损失作为困难样例，反向传播其相应的梯度，其他候选框的梯度不进行回传，即不更新模型权重。 
+多任务损失分别存在于RPN及检测网络中，图2中显示的是检测网络结构示意图。每一个候选框均送感兴趣池化层，后接两层的全连接层和多元逻辑回归分类损失（图\ref{fig:ch05_02}中Softmax loss），候选区域回归定位损失（图\ref{fig:ch05_02}中Box.reg loss）和旋转朝向回归损失（图\ref{fig:ch05_02}中Rotation loss）：
+\begin{equation} \label{eq:ch05_10}
+      L(p,p^*,t,t^*,o,o^*)=L_{cls}(p,p^*)+\lambda[p^*> 0]L_{box}(t,t^*)+\mu [p^*> 0]L_{VM}(o,o^*)
+\end{equation} 
 
- 
-候选区域生成网络模型结构 
- 
- 
+式中，分别代表预测类别分类概率，候选框偏移量和感兴趣区域内物体的朝向大小； 表示标记类别为背景， 表示框内是否有目标的指示函数， 分别表示物体的候选框标记和真实朝向。 为两个损失的相应平衡权重大小，详细形式如下：
+ \begin{equation} \label{eq:ch05_11}
+      L_{(cls)}(p,p^*)=-\sum_{c}\log p_{c}^*
+\end{equation} 
+
+ \begin{equation} \label{eq:ch05_12}
+      L_{box}(t,t^*)=-\sum_{i \in {(x,y,w.h)}}smooth_{L1}(t^*-t)
+\end{equation} 
+
+\begin{equation} \label{eq:ch05_13}
+smooth_{L1}(x)= \left\{
+     \begin{matrix}
+0.5x^2 & if \mid x\mid<1 \\
+ \mid x\mid-0.5 & else \\
+\end{matrix}\right.
+\end{equation} 
+
+ $L_{cls}(p,p^*)$和$L_{box}(t,t^*)$ 是公式\ref{eq:ch05_04}中的分类损失和相应的平滑L1损失，$c$代表类别数。
+\subsection{困难样例挖掘}
+
+由于医学数据样本标注困难，数量相对较少，一般假设与目标位置矩形框有重叠的候选框是有较大概率是难以区分的，结果也可能是次优的，因为在其他位置可能存在更难区分的样本，导致模型收敛变慢，误警率高。在每次迭代训练过程中采用在线困难样例挖掘方法（Online Hard Example Mining，OHEM）\citep{Shrivastava2016a}，对所有候选框的损失进行排序，由于相似候选框重叠区域的损失很接近，可采用非极大值抑制策略限制候选框的数目，选择前$k$个最大损失作为困难样例，反向传播其相应的梯度，其他候选框的梯度不进行回传，即不更新模型权重。 
+
 \section{实验结果分析和讨论}
  
-为验证提出的自动检测算法的有效性和正确性，本节将分别采用一个公开可用的MRI数据集，和我们收集的来源于四川大学华西医院麻醉科的经食道超声心动图数据集（不包含患者信息）上进行实验。相关实验代码请参考https://github.com/taopanpan/echodetection。
-3.1检测MRI左心室短轴
-纽约大学提供的公用数据集[24]包含33名患者的心脏MRI体数据，以及LV心内膜和心外膜的手动分割结果。该数据集中的大多数切片包含心脏疾的病例切片。该数据集使用 GE Genesis Signa MRI扫描仪，采取FIESTA方案扫描获得。每个患者的20个序列帧包含8-15个短轴切片，大小为256x256，厚度为6-13 mm，像素分辨率为0.93-1.64 mm。为了检验所提出方法定位性能，取14个体数据形成1176个切片作为训练集，其余作为测试集。本实验中不使用旋转朝向损失，评价指标采用文献[15]中定量评估计算左心室短轴（SAX）定位的准确度，敏感性和特异性。
-表 1 不同模型检测精度的比较
+为验证提出的自动检测算法的有效性和正确性，本节将分别采用一个公开可用的MRI数据集，和我们收集的来源于四川大学华西医院麻醉科的经食道超声心动图数据集（不包含患者信息）上进行实验。相关实验代码请参考\footnote{https://github.com/taopanpan/echodetection}。
+
+\subsection{检测MRI左心室短轴}
+
+纽约大学提供的公用数据集\citep{ 24}包含33名患者的心脏MRI体数据，以及LV心内膜和心外膜的手动分割结果。该数据集中的大多数切片包含心脏疾的病例切片。该数据集使用 GE Genesis Signa MRI扫描仪，采取FIESTA方案扫描获得。每个患者的20个序列帧包含8-15个短轴切片，大小为256x256，厚度为6-13 mm，像素分辨率为0.93-1.64 mm。为了检验所提出方法定位性能，取14个体数据形成1176个切片作为训练集，其余作为测试集。本实验中不使用旋转朝向损失，评价指标采用文献\citepns{Emad2015}中定量评估计算左心室短轴（SAX）定位的准确度，敏感性和特异性。
+
+\begin{table}[!htbp]
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lccc}
+        \cline{1-3}% partial hline from column i to column j
+           \qquad Method  & Accuracy & Sensitivity &Specificity \\
+        \hline
+        Baseline\citep{•} & $95.06\%$ & $73.91\%$ & $97.56\%$\\
+        \hline
+        VGG16 & $96.35\%$ & $74.68\%$& $99.26\%$ \\
+        \hline
+        ResNet101 & $98.66\%$ & $76.81\%$& $99.16\%$ \\
+        \hline
+        VGG16\_OHEM & $96.56\%$ & $79.42\%$& $99.07\%$ \\
+        \hline
+        ResNet101\_OHEM & $\textbf{99.49\%}$ & $\textbf{83.12\%}$ & $\textbf{99.40\%}$\\
+        \hline\hline
+    \end{tabular}
+    \caption{不同模型检测精度的比较}
+    \label{tab:ch05_02}
+\end{table}
 
 为评价不同深度模型对检测效果的影响，实验的检测模型选取VGG16[25]和ResNet101[26]，训练方法采取端到端的近似联合优化，OHEM表明训练过程中采用困难样例挖掘方法，即在训练中只选择损失占前70%的样本进行反向传播。训练参数及实现跟文献[18]中一致，迭代次数为1000，以文献[18]方法作为基准（表1中Baseline），评价指标采用通用的定位精度、敏感性和特异性，结果见表1所示，在测试集上最优检测准确度99.49%，敏感性83.12%，特异性为99.40%，与基准检测模型相比精度提高了超过3％，同时提高了约1.5％的特异性。
 另一方面，敏感性是最容易提高的参数，平均超过8％，模型不能正确定位为大尺寸的心脏，导致较小LV切片的高FP，降低了整体系统性能。而困难样例挖掘的方法没有显著提高特异性，因为TN和FP都降低。考虑到心脏异常的高变异性导致心脏形状的大变异性，所提出的算法均能成功定位LV短轴，当检测出心室短轴时，可大致确定心室中心点（如图5(a)所示），利用二腔心(2CH)和四腔心切面(4CH)均垂直于短轴切面的先验，找到与SAX的2CH和4CH交集在SAX平面上投影，然后得到投影线在2D图像上相交的位置，即为左心室的3D位置（如图5(b)所示）。
-3.2检测左心室及其朝向
+\subsection{检测左心室及其朝向}
+
 MRI左心室短轴的检测由于组织结构相对简单，且噪声少。为验证提出算法的通用性，针对超声图像左心室长轴切面检测心室、二尖瓣环、心内膜垫和心尖位置，并估计左心室朝向。主要包含单扇形和多普勒成像的双扇形两种由专业医师标注食管中段四腔心(ME4C) 的标准切面视频构成，视频中至少包含2-3个心动周期，依据医师建议从视频中截取5帧，并经医师检验手工筛选后得到900张ME4C切面，对切面内左心室（LV），二尖瓣环、心内膜垫和心尖位置进行人工标注作为“金标准”。其中随机选取100张作为测试集，其余作为训练集。
-训练时采用提出的联合多任务损失，以VGG16网络作为检测的预训练的模型为例，在RPN中添加空间变换网络实现了各个候选框的空间变换，并施加旋转朝向损失。VGG16网络特征提取器包括13个卷积层，并输出512个conv5特征图，空间变换网络包括具有两个同样卷积池化层组成的定位网络，其由20个卷积核大小为5、步长为1和核大小为2的池化层构成，两层全连接层回归得出6个仿射变换参数，其中，全连接层的激活函数需选择为双曲正切函数，权重高斯初始化，而变换参数初始化为[1 0 0 0 1 0]T。其它跟Faster RCNN中设置一致，其中 ， 分别取0.1和0.001；训练方法采取端到端的近似联合优化，迭代轮数为50000。评价指标采用平均检测精度(mean average precision，mAP)，是多个类别平均检测精度的平均值。表二显示使用提出方法分别在VGG16模型和ResNet101模型上，结合困难样例挖掘训练方法得出的测试结果，其中OHEM表示相应模型结合在线困难样例挖掘方法的检测结果，STN表示结合提出带朝向损失的空间变换网络的检测结果，在测试集上，针对左心室的AP最优可达99.1%，结果表明提出算法在不同基础模型上均可提高检测精度。
-表 2 不同模型检测精度，LV表示左心室，Apx代表心尖，left代表二尖瓣环，right代表心内膜垫
-Tab.2 Different models of detection accuracy,LV on behalf of the left ventricle,Apx on behalf of the apex, left said mitral annulus, right on behalf of the endocardial cushion
-method                        mAP             LV               apx              left              right       
+训练时采用提出的联合多任务损失，以VGG16网络作为检测的预训练的模型为例，在RPN中添加空间变换网络实现了各个候选框的空间变换，并施加旋转朝向损失。VGG16网络特征提取器包括13个卷积层，并输出512个conv5特征图，空间变换网络包括具有两个同样卷积池化层组成的定位网络，其由20个卷积核大小为5、步长为1和核大小为2的池化层构成，两层全连接层回归得出6个仿射变换参数，其中，全连接层的激活函数需选择为双曲正切函数，权重高斯初始化，而变换参数初始化为[1 0 0 0 1 0]T。其它跟Faster RCNN中设置一致，其中 ， 分别取0.1和0.001；训练方法采取端到端的近似联合优化，迭代轮数为50000。评价指标采用平均检测精度(mean average precision，mAP)，是多个类别平均检测精度的平均值。表二显示使用提出方法分别在VGG16模型和ResNet101模型上，结合困难样例挖掘训练方法得出的测试结果，其中OHEM表示相应模型结合在线困难样例挖掘方法的检测结果，STN表示结合提出带朝向损失的空间变换网络的检测结果，在测试集上，针对左心室的AP最优可达99.12%，结果表明提出算法在不同基础模型上均可提高检测精度。
+
+\begin{table}[!htbp]
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lccccc}
+        \cline{1-5}% partial hline from column i to column j
+           \qquad Method  & MAP & lv &apx &left &right\\
+         
+        \hline
+        VGG16\_OHEM & $80.11\%$ & $90.12\%$& $65.46\%$ & $81.27\%$& $83.53\%$\\        
+        \hline
+        VGG16\_OHEM\_STN & $82.05\%$ & $90.92\%$& $66.57\%$& $86.16\%$& $84.46\%$ \\
+        \hline
+        ResNet101\_OHEM & $83.06\%$ & $95.72\%$& $66.39\%$& $85.25\%$& $84.83\%$ \\
+        \hline
+        ResNet101\_OHEM\_STN & $\textbf{85.59\%}$ & $\textbf{99.12\%}$ & $\textbf{67.89\%}$ & $\textbf{87.66\%}$ & $\textbf{87.48\%}$\\
+        \hline\hline
+    \end{tabular}
+    \caption{不同模型检测精度，LV表示左心室，Apx代表心尖，left代表二尖瓣环，right代表心内膜垫}
+    \label{tab:ch05_03}
+\end{table}
 
 
 为验证提出算法在检测左心室位置的同时可以回归学习左心室的姿态参数、预测左心室的朝向变换，超参数k跟文献[22]一致，交叠比大于0.5时估计姿态参数，人为标定心室朝向存在较大偏差，但可以根据二尖瓣环、心内膜垫和心尖位置估算出心室朝向角度作为对照。由于ME4C切面中心室的大概朝向的分布范围在[-45o,45o]之间，通过手工构建训练集，训练样本旋转以15o为间隔的指定角度。通过分析相关估算结果和预测结果，可以发现二者具有很大的一致性。左心室检测结果和旋转朝向结果见表3，检测结果如图5(c,d)所示，更多实验结果请参考给定开源地址。
-表 3 不同旋转角度分类检测性能比较，Compute表示根据额外标记计算得到的结果，Pred表示模型预测结果
-Tab.3 Comparison of different rotation angle detection performance, Compute represents the results calculated according to the additional markers, Pred represents the model prediction results
-method                -45o          -30o          -15o           +15o          +30o          +45o            Avg
-Compute	66.6	78.0	87.3	85.5	75.8	62.3	75.9
-Pred	73.0	81.7	81.7	89..5	80.4	70.3	80.7
+\begin{table}[!htbp]
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lccccccc}
+        \cline{1-7}% partial hline from column i to column j
+           \qquad Method  & $-45^{\circ}$ & $-30^{\circ}$ & $-15^{\circ}$ & $+15^{\circ}$ & $+30^{\circ}$&$ +45^{\circ}$& Avg\\
+         
+        \hline
+        Compute & $66.65\%$ & $78.02\%$& $87.39\%$& $85.53\%$& $75.83\%$ &$62.31\%$ &$75.94\%$  \\
+        \hline
+        Pred & $\textbf{73.09\%}$ & $\textbf{81.72\%}$ & $\textbf{81.75\%}$ & $\textbf{89.56\%}$ & $\textbf{80.48\%}$& $\textbf{70.31\%}$& $\textbf{80.76\%}$\\
+        \hline\hline
+    \end{tabular}
+    \caption{不同旋转角度分类检测性能比较，Compute表示根据额外标记计算得到的结果，Pred表示模型预测结果}
+    \label{tab:ch05_04}
+\end{table}
 
 为了更详细地评估模型性能，使用检测分析工具[27]分析了心尖位置的检测结果，如图3显示模型可以准确（白色区域）检测到心尖位置，召回率在84-87％左右，并且比“弱”标准（小于0.1交叠比）高得多。针对心尖位置的定位精确度较低，这是因为医师在标定心尖位置时有很大的随意性，且目标尺寸较小，与类似对象类别有更多的混淆。
- 	                      (a)			                              (b)        
-图3 (a)显示apx检测精度的累积分布：正确的（Cor）或定位不准确（Loc）的假阳性，与之混淆类似类别（Sim）与其他类别（Oth）或背景（BG）。固体红色线是以“强”标准（大于0.5 交叠比），反映精确度随检测增加而变化。红色虚线使用“弱”标准（大于0.1交叠比）。(b)显示排名靠前的假阳性类型的分布。
-Fig. 3: Visualization of performance for our model on apx. (a) shows the cumulative fraction of detections that are correct (Cor) or false positive due to poor localization (Loc), confusion with similar categories (Sim), with others (Oth), or with background (BG). The solid red line reflects the change of recall with ”strong” criteria (0.5 overlap) as the number of detections increases. The dashed red line is using the ”weak” criteria (0.1 overlap). (b) shows the distribution of top-ranked false positive types.
+\begin{figure}[!htbp]
+\centering
+%trim option's parameter order: left bottom right top
+%\includegraphics[trim = 30mm 0mm 30mm 0mm, clip, width=0.45\textwidth]{ch03_02}
+\includegraphics[width=0.85\textwidth]{ch05_03}
+\caption{左图显示apx检测精度的累积分布：正确的（Cor）或定位不准确（Loc）的假阳性，与之混淆类似类别（Sim）与其他类别（Oth）或背景（BG）。固体红色线是以“强”标准（大于0.5 交叠比），反映精确度随检测增加而变化。红色虚线使用“弱”标准（大于0.1交叠比）。右图显示排名靠前的假阳性类型的分布。}
+\label{fig:ch05_03}
+\end{figure} 	                      (a)			                              (b)        
  
-      (a)                  (b)                     (c)                   (d)
-图5 (a,b) 表示不同MRI图像检测左心室结果，(c,d)两图表示超声心动图的ME4C切面的左心室、二尖瓣环、心内膜垫和心尖位置及旋转角度的检测结果。
-Fig. 5 (a,b) show the results of the left ventricular of different MRI images. (c,d)show the left ventricular, mitral annulus, endocardial pad and apical position and rotation angle of the ME4C section of echocardiography of the test results.
-
-
+\begin{figure}[!htbp]
+\centering
+%trim option's parameter order: left bottom right top
+%\includegraphics[trim = 30mm 0mm 30mm 0mm, clip, width=0.45\textwidth]{ch03_02}
+\includegraphics[width=0.85\textwidth]{ch05_03}
+\caption{(a,b) 表示不同MRI图像检测左心室结果，(c,d)两图表示超声心动图的ME4C切面的左心室、二尖瓣环、心内膜垫和心尖位置及旋转角度的检测结果。}
+\label{fig:ch05_04}
+\end{figure} 	                      (a)			                              (b)        
+ 
 \section{本章小结}
-4结语
+
 本文利用深度学习来解决医学图像计算机辅助检测问题，设计并验证了自动检测MRI短轴和超声心动图中LV长轴切面的方法，在通用物体检测Faster RCNN框架的基础上，针对RPN引入空间变换，结合带朝向损失的多任务损失，探索解决图像平面内物体旋转角度检测的问题，并利用困难样例挖掘策略加快迭代训练。在公共MRI数据集和自主收集的超声心动图数据上进行详尽实验验证，在多个评估指标方面提供更好的测试结果，但该方法仍耗费较多的标注数据，探索需要更少标注数据的检测算法是将来的工作目标。
