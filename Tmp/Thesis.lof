@@ -1,0 +1,27 @@
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Deep-Echo模型结构示意图\relax }}{15}{figure.caption.13}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 七类标准切面超声心动图及数量分布\relax }}{17}{figure.caption.14}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 不同数据量的平均分类精度\relax }}{18}{figure.caption.15}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 各类切面的原图和显著性热力图\relax }}{19}{figure.caption.17}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 深度模型泛化性能可视化分析\relax }}{19}{figure.caption.18}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 高斯和拉普拉斯金字塔\relax }}{25}{figure.caption.19}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 不同模型类别可视化实验结果\relax }}{26}{figure.caption.20}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 不同正则化方法的可视化效果\relax }}{28}{figure.caption.21}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 金字塔分解正则化可视化效果\relax }}{29}{figure.caption.22}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 引入类别激活图的可视化\relax }}{29}{figure.caption.23}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 左上：引入空间不变性的anchor机制\ 左下：空间变换网络 右：Faster R-CNN带仿射变换的检测模型框架\relax }}{34}{figure.caption.25}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 考虑物体朝向的区域生成网络模型结构示意图，图中conv表示卷积层，pool表示池化层，FC表示全连接层，softmax class loss表示多任务损失中的分类损失，Bbox.reg loss 表示候选框回归定位损失，Rotation loss表示文中的针对变换参数θ的Von Mise损失。\relax }}{35}{figure.caption.26}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 左图显示apx检测精度的累积分布：正确的（Cor）或定位不准确（Loc）的假阳性，与之混淆类似类别（Sim）与其他类别（Oth）或背景（BG）。固体红色线是以“强”标准（大于0.5 交叠比），反映精确度随检测增加而变化。红色虚线使用“弱”标准（大于0.1交叠比）。右图显示排名靠前的假阳性类型的分布。\relax }}{40}{figure.caption.30}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces (a,b) 表示不同MRI图像检测左心室结果，(c,d)两图表示超声心动图的ME4C切面的左心室、二尖瓣环、心内膜垫和心尖位置及旋转角度的检测结果。\relax }}{40}{figure.caption.31}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}

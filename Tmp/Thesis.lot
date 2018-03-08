@@ -1,0 +1,18 @@
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\contentsline {table}{\numberline {3.1}{\ignorespaces 不同模型分类精度比较\relax }}{18}{table.caption.16}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\contentsline {table}{\numberline {5.1}{\ignorespaces 物体检测算法流程 \relax }}{32}{table.caption.24}
+\contentsline {table}{\numberline {5.2}{\ignorespaces 不同模型检测精度的比较\relax }}{38}{table.caption.27}
+\contentsline {table}{\numberline {5.3}{\ignorespaces 不同模型检测精度，LV表示左心室，Apx代表心尖，left代表二尖瓣环，right代表心内膜垫\relax }}{39}{table.caption.28}
+\contentsline {table}{\numberline {5.4}{\ignorespaces 不同旋转角度分类检测性能比较，Compute表示根据额外标记计算得到的结果，Pred表示模型预测结果\relax }}{39}{table.caption.29}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
